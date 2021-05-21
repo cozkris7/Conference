@@ -1,0 +1,200 @@
+<!--Kristo Nako
+05/10/2021
+Last update: 05/20/2021-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Register</title>
+</head>
+<body>
+    <header>
+        <img src="img/download.png">
+        <ul>
+            <a href="index.html"><li>Home</li></a>
+            <a href="registration.html"><li>Register</li></a>
+            <a href="contact.html"><li>Contact Us</li></a>
+        </ul>
+    </header>
+
+    <div class="fullContainer" id="mainCon2">
+        <div class="topBack">
+            <h1>Register Now</h1>
+        </div>
+    </div>
+
+    <div class="container registerForm">
+        <form method="post" action="#">
+            <table>
+            <tr><td><label for="name">Full Name:</label></td>
+            <td><input type="text" id="name" class="formInput"></td></tr>
+            <tr><td><label for="email">Email:</label></td>
+            <td><input type="email" id="email" class="formInput"></td></tr>
+            <tr><td><label for="pass">Password:</label></td>
+            <td><input type="password" id="pass" class="formInput"></td></tr>
+            <tr><td><label for="passCon">Confirm Password:</label></td>
+            <td><input type="password" id="passCon" class="formInput"></td></tr>
+            <tr><td><label for="phone">Phone Number:</label></td>
+            <td><input type="tel" id="phone" class="formInput"></td></tr>
+            <tr><td><label for="organization">Organization:</label></td>
+            <td><input type="text" id="organization" class="formInput"></td></tr>
+            <tr><td><label for="country">Country:</label></td>
+            <td><input type="text" id="country" class="formInput"></td></tr>
+            <tr><td><label for="rType">Registration Type:</label></td>
+            <td><input type="radio" id="rType" value="Author ($400)" name="rType" class="" checked> Author ($400)
+                <input type="radio" id="rType" value="Participant ($300)" name="rType" class=""> Participant ($300)
+                <input type="radio" id="rType" value="Student ($100)" name="rType" class=""> Student ($100)</td></tr>
+            <tr><td><label for="discount">Discount Coupon:</label></td>
+            <td><input type="text" id="discount" class="formInput"></td></tr>
+            <tr><td></td>
+            <td><div id="dis"></div></td></tr>
+            <tr>
+                <td></td>
+                <td><div id="errors">
+                    <ul>
+                        <li id="errName" class="errorList hide">Missing Full Name</li>
+                        <li id="errEmail" class="errorList hide">Invalid or missing email address</li>
+                        <li id="errPass1" class="errorList hide">Password must be between 10 and 20 characters</li>
+                        <li id="errPass2" class="errorList hide">Password must contain at least one lowercase character</li>
+                        <li id="errPass3" class="errorList hide">Password must contain at least one uppercase character</li>
+                        <li id="errPass4" class="errorList hide">Password must contain at least one digit</li>
+                        <li id="errPass5" class="errorList hide">Password and confirmation password don’t match</li>
+                        <li id="errOrganization" class="errorList hide">Missing attendee organization</li>
+                        <li id="errCountry" class="errorList hide">Missing attendee country</li>
+                        <li id="errPhone" class="errorList hide">Wrong phone number provided</li>
+                    </ul>
+                </div></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="button" id="btnSub" class="btnSub">Submit</button></td>
+            </tr>
+            </table>
+        </form>
+    </div>
+
+    <footer>
+        <p>15-16 July 2021</p>
+        <p>Lehman College 1St International Conference in Cloud Computing</p>
+        <p>Bronx, NY</p>
+    </footer>
+
+    <script>
+        document.getElementById("btnSub").addEventListener("click",function(){
+            var name = document.getElementById("name");
+            var email = document.getElementById("email");
+            var pass = document.getElementById("pass");
+            var passCon = document.getElementById("passCon");
+            var phone = document.getElementById("phone");
+            var organization = document.getElementById("organization");
+            var country = document.getElementById("country");
+            var x=1;
+            if(name.value.trim().length<1)
+            {
+                x=0;
+                document.getElementById("errName").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errName").classList.add("hide");
+            }
+            if(!email.value.match(/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,5}$/))
+            {
+                x=0;
+                document.getElementById("errEmail").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errEmail").classList.add("hide");
+            }
+            if(pass.value.length<10 || pass.value.length>20)
+            {
+                x=0;
+                document.getElementById("errPass1").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errPass1").classList.add("hide");
+            }
+            if(!pass.value.match(/^(?=.*[a-z]).{1,}$/))
+            {
+                x=0;
+                document.getElementById("errPass2").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errPass2").classList.add("hide");
+            }
+            if(!pass.value.match(/^(?=.*[A-Z]).{1,}$/))
+            {
+                x=0;
+                document.getElementById("errPass3").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errPass3").classList.add("hide");
+            }
+            if(!pass.value.match(/^(?=.*[0-9]).{1,}$/))
+            {
+                x=0;
+                document.getElementById("errPass4").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errPass4").classList.add("hide");
+            }
+            if(pass.value != passCon.value)
+            {
+                x=0;
+                document.getElementById("errPass5").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errPass5").classList.add("hide");
+            }
+            if(organization.value.trim().length<1)
+            {
+                x=0;
+                document.getElementById("errOrganization").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errOrganization").classList.add("hide");
+            }
+            if(country.value.trim().length<1)
+            {
+                x=0;
+                document.getElementById("errCountry").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errCountry").classList.add("hide");
+            }
+            if(phone.value.trim().length<1 || !phone.value.match(/^[0-9]{3}\-[0-9]{3}\-[0-9]{4}$/))
+            {
+                x=0;
+                document.getElementById("errPhone").classList.remove("hide");
+            }
+            else
+            {
+                document.getElementById("errPhone").classList.add("hide");
+            }
+        });
+
+        document.getElementById("discount").addEventListener("change",function(){
+            if(document.getElementById("discount").value=="dis20")
+            {
+                document.getElementById("dis").innerHTML="20% Discount";
+            }
+            else
+            {
+                document.getElementById("dis").innerHTML="Invalid Code";
+            }
+        });
+    </script>
+</body>
+</html>
